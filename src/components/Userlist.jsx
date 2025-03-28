@@ -10,6 +10,10 @@ import { OrbitProgress } from 'react-loading-indicators';
 const Userlist = () => {
     const [users,setusers]= useState([])
     const [loading , setloading] = useState(true)
+
+    const sort = users.sort()
+
+    console.log("Sort",sort)
   
     //fettching data from the api
     useEffect(() => {
@@ -72,8 +76,10 @@ const Userlist = () => {
 <OrbitProgress color="#32cd32" size="medium" text="" textColor="" />
             </div>
           ) : (
+            // sorted by the name
             <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 mx-10 my-5'>
-              {users.map(user => (
+              {[...users]
+  .sort((a, b) => a.name.localeCompare(b.name)).map(user => (
                 <Usercard
                   key={user.id}
                   user={user}
